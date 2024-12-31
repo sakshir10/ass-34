@@ -18,5 +18,47 @@
     </div>
 
     <div id="students-container"></div>
+    <script>
+        function getRandomEmoji(){
+            const emojis=[
+                '🤗','🙂','🤔','🥲','🤩','😜',
+                '😺','😸','😸','😹','💀','🤖',
+                '🤖','🐗','🐭','🦍','🦧','🐖',
+                '🦢','🪼','🪸','🦀','🐚','🦑',
+                '🐙','🦢','🦜','🦩','🦚'
+            ];
+            const min=0;
+            const max=emojis.length - 1;
+            const randomIndex=Math.floor(Math.random()*(max-min+1))+min;
+            return emojis[randomIndex];
+        }
+        const students=["Guest"];
+           
+        function loadStudents(){
+            const studentsContainer=document.getElementById("students-container");
+            studentsContainer.innerHTML="";
+            for(let i=0; i<students.length; i++){
+                studentsContainer.innerHTML +=`<div class='student-card'>${getRandomEmoji()} ${i+1}) ${students[i]}</div>`;
+            }
+        }
+        loadStudents();
+
+        const studentInput=document.getElementById("student-name");
+
+        function addStudent(){
+            students.push(studentInput.value);
+            studentInput.value="";
+            loadStudents();
+        }
+
+        function removeStudent(){
+            const studentIndex=students.indexOf(studentInput.value);
+            if (studentIndex !== -1) {  // Only remove if the student exists in the list
+                students.splice(studentIndex, 1);
+            }
+            studentInput.value="";
+            loadStudents();
+        }
+    </script>
 </body>
 </html>
